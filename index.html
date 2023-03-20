@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Ajax Text</title>
+</head>
+<body>
+
+<div id="main">
+  Apple Employee System
+</div>
+
+<button id="ajax-button" type="button">Login to System</button>
+
+<script>
+  function replaceText() {
+    var target = document.getElementById("main");
+    var xhr = new XMLHttpRequest(); // we did a new instance of xmlHttpRequest Object
+    xhr.open('GET', 'display.php', true); // sending to request the page is which is new_content.txt
+    xhr.onreadystatechange = function () {
+      console.log('readyState: ' + xhr.readyState);
+      if(xhr.readyState == 2) {
+        target.innerHTML = 'Loading...';
+      }
+      if(xhr.readyState == 4 && xhr.status == 200) {
+        // Whatever we get back  thats what we are going to set it to  ( Response Text ) ;
+
+        target.innerHTML = xhr.responseText;
+      }
+    }
+    xhr.send(); /// sending to htmlhttprequest object
+  }
+
+  var button = document.getElementById ("ajax-button");
+  button.addEventListener("click", replaceText);
+</script>
+
+</body>
+</html>
